@@ -1,3 +1,45 @@
+/*
+//Examples on different types of data in JavaScript
+//Number data type
+var num = 45;
+console.log(num);
+//String data type
+var name = "Khadija"
+console.log(name);
+//Boolean data type
+var bool = false;
+console.log(bool);
+//Undefined data type
+var x;
+console.log(x);
+//Reassigning the same undefined data type x to null
+//Null data type
+x = null;
+console.log(x);
+//an array holding same type of data
+var arr1 = [1,2,3,4,5];
+console.log(arr1);
+//number of elements in an array
+console.log(arr1.length);
+//an array holding different type of data
+var arr2 = [1,2,3,4,"hello", true, null];
+console.log(arr2);
+//an array inside an array
+var arr3 = [1,2,3,4,5,6,[7,8,9,56, "hello"], "bright"];
+console.log(arr3);
+//accessing the elements of array
+console.log(arr3[3]);
+console.log(arr3[6][4]);
+console.log(arr3[6][1]);
+//pushing new values into array
+arr1.push(6,7,8,9);
+console.log(arr1);
+//popping the last element of array
+arr1.pop();
+console.log(arr1);
+
+*/
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -8,6 +50,7 @@ var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
 
+var gameState = "onSling";
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -69,16 +112,18 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gameState !== "launched"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
 }
-
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launched";
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+        //slingshot.attach(bird.body);
     }
 }
